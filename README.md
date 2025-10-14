@@ -1,87 +1,46 @@
-# Welcome to React Router!
+# JobFit: AI-Powered Applicant Tracking System (ATS) Analyzer
 
-A modern, production-ready template for building full-stack React applications using React Router.
-
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/remix-run/react-router-templates/tree/main/default)
-
-## Features
-
-- 🚀 Server-side rendering
-- ⚡️ Hot Module Replacement (HMR)
-- 📦 Asset bundling and optimization
-- 🔄 Data loading and mutations
-- 🔒 TypeScript by default
-- 🎉 TailwindCSS for styling
-- 📖 [React Router docs](https://reactrouter.com/)
-
-## Getting Started
-
-### Installation
-
-Install the dependencies:
-
-```bash
-npm install
-```
-
-### Development
-
-Start the development server with HMR:
-
-```bash
-npm run dev
-```
-
-Your application will be available at `http://localhost:5173`.
-
-## Building for Production
-
-Create a production build:
-
-```bash
-npm run build
-```
-
-## Deployment
-
-### Docker Deployment
-
-To build and run using Docker:
-
-```bash
-docker build -t my-app .
-
-# Run the container
-docker run -p 3000:3000 my-app
-```
-
-The containerized application can be deployed to any platform that supports Docker, including:
-
-- AWS ECS
-- Google Cloud Run
-- Azure Container Apps
-- Digital Ocean App Platform
-- Fly.io
-- Railway
-
-### DIY Deployment
-
-If you're familiar with deploying Node applications, the built-in app server is production-ready.
-
-Make sure to deploy the output of `npm run build`
-
-```
-├── package.json
-├── package-lock.json (or pnpm-lock.yaml, or bun.lockb)
-├── build/
-│   ├── client/    # Static assets
-│   └── server/    # Server-side code
-```
-
-## Styling
-
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever CSS framework you prefer.
+> **Technology:** React  
+> **Status:** Production Ready  
+> **UI Theme:** Modern Dark Mode  
+> **Author:** Kavinda Dissanayake
 
 ---
 
-Built with ❤️ using React Router.
+## 🌟 About JobFit
+
+JobFit is an AI-powered web app that helps job seekers and recruiters instantly evaluate a resume’s strength against a specific job description. It delivers a detailed ATS (Applicant Tracking System) score and actionable feedback on content, structure, tone, and keyword alignment — all wrapped in a fast, modern, dark-mode UI.
+
+This project blends clean React engineering with practical AI to give a professional, seamless, and intuitive experience.
+
+---
+
+## ✨ Features
+
+- **Instant ATS Scoring** — A clear, out-of-100 score for resume–JD match.
+- **Detailed AI Feedback** — Targeted suggestions across **Tone & Style**, **Content**, **Structure**, and **Skills/Keywords**.
+- **Resume Visualization** — Sticky, high-contrast side-by-side view of Job Details and Resume Preview.
+- **Animated, Glassy UI** — Modern dark theme with subtle motion and glassmorphism accents.
+- **Client-Side AI Processing** — Powered by **Puter.js** for analysis, auth, and storage (no separate API keys or complex backend).
+
+---
+
+## 🛠️ Tech Stack
+
+- **Frontend:** React (functional components & Hooks)
+- **Styling:** Tailwind CSS (utility-first, fully responsive)
+- **Routing:** React Router
+- **AI & Storage:** Puter.js (analysis, auth, file storage)
+- **State:** React Hooks (`useState`, `useEffect`, Context)
+
+---
+
+## 🚀 Installation & Setup
+
+### Prerequisites
+- **Node.js 16+** and **npm** installed
+
+### 1) Clone the repository
+```bash
+git clone [YOUR_GITHUB_REPO_LINK]
+cd ai-resume-analyzer
