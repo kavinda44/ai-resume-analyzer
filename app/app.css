@@ -3,16 +3,16 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-/* --- Theme Variables: Dark/Indigo Theme --- */
+
 @theme {
     --font-sans: "Poppins", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
     
-    /* Primary Colors: Deep Indigo/Blue (#372AAC from your SVG) */
-    --color-primary-500: #4f46e5; /* Standard Indigo 600 */
-    --color-primary-600: #4338ca; /* Standard Indigo 700 (Hover) */
-    --color-dark-bg: #1f2937; /* Gray 800 */
+   
+    --color-primary-500: #4f46e5; 
+    --color-primary-600: #4338ca; 
+    --color-dark-bg: #1f2937; 
     
-    /* Notification/Badge Colors (Keep for consistency) */
+    
     --color-badge-green: #d1fae5; 
     --color-badge-red: #fee2e2; 
     --color-badge-yellow: #fffbeb; 
@@ -22,34 +22,34 @@
     --color-badge-yellow-text: #92400e;
 }
 
-/* --- Base Styles --- */
+
 html,
 body {
-    /* Use a dark background to match the SVG */
+    
     @apply bg-gray-900 text-white; 
 }
 
-/* --- Form Elements (Styled for Dark Mode) --- */
+
 input, textarea {
-    /* Light input border, dark background for contrast */
+    
     @apply w-full p-3 border border-gray-700 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 bg-gray-800 text-white shadow-sm transition duration-150;
     box-shadow: none;
 }
 
-/* --- Component Overrides (@layer components) --- */
+
 @layer components {
-    /* **REQUIRED: Glass Effect Utility (Re-used for Navbar)** */
+    
     .glass-effect {
-        /* Lighter, subtle effect for a dark background */
+     
         background-color: rgba(255, 255, 255, 0.05); 
         backdrop-filter: blur(8px); 
         border: 1px solid rgba(255, 255, 255, 0.1);
         box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     }
 
-    /* Resume Card (Styled for Dark Mode) */
+
     .resume-card {
-        /* Darker, elevated card look */
+      
         @apply bg-gray-800 rounded-xl shadow-2xl hover:shadow-indigo-500/30 transition duration-300 p-6 flex flex-col gap-4;
         height: auto; 
     }

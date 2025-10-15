@@ -1,9 +1,8 @@
 import { useState, useCallback } from 'react'
 import { useDropzone } from 'react-dropzone'
-import { formatSize } from '../lib/utils' // Assuming this utility is available
+import { formatSize } from '../lib/utils' 
 
-// Using Lucide icons for a professional look (you may need to install 'lucide-react' or use SVGs)
-// For simplicity, we'll use inline SVGs or placeholders where necessary.
+
 const UploadIcon = () => (
     <svg className="w-10 h-10 text-indigo-400" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 7.948M12 16v6M9 19h6"/>
@@ -16,14 +15,13 @@ interface FileUploaderProps {
 
 const FileUploader = ({ onFileSelect }: FileUploaderProps) => {
   
-  // NOTE: You don't need the useState for the file if you rely on acceptedFiles
-  // from useDropzone, but we'll keep the logic clean.
+ 
   const onDrop = useCallback((acceptedFiles: File[]) => {
     const file = acceptedFiles[0] || null;
     onFileSelect?.(file);
   }, [onFileSelect]);
 
-  const maxFileSize = 20 * 1024 * 1024; // 20MB in bytes
+  const maxFileSize = 20 * 1024 * 1024;
 
   const { getRootProps, getInputProps, isDragActive, acceptedFiles, fileRejections } = useDropzone({
     onDrop,
@@ -35,20 +33,19 @@ const FileUploader = ({ onFileSelect }: FileUploaderProps) => {
   const file = acceptedFiles[0] || null;
   const hasError = fileRejections.length > 0;
 
-  // Conditional Styling based on state (modern approach)
   const dropzoneClasses = `
     w-full p-12 text-center rounded-xl transition-colors duration-300 border-2 
     ${isDragActive 
-        ? 'border-indigo-500 bg-indigo-900/30' // Drag active state
+        ? 'border-indigo-500 bg-indigo-900/30'
         : hasError 
-            ? 'border-red-500 bg-red-900/30' // Error state
-            : 'border-gray-700 hover:border-indigo-500 bg-gray-800' // Default state
+            ? 'border-red-500 bg-red-900/30' 
+            : 'border-gray-700 hover:border-indigo-500 bg-gray-800' 
     }
     ${!file ? 'border-dashed cursor-pointer' : 'border-solid'}
   `;
 
   const handleRemoveFile = (e: React.MouseEvent) => {
-    e.stopPropagation(); // Prevent the dropzone from re-opening
+    e.stopPropagation(); 
     onFileSelect?.(null);
   };
   
@@ -60,7 +57,7 @@ const FileUploader = ({ onFileSelect }: FileUploaderProps) => {
       >
         <input {...getInputProps()} />
 
-        {/* Selected File View (Clean, dark-mode card) */}
+       
         {file ? (
           <div className="flex items-center justify-between p-4 bg-gray-700/50 rounded-lg shadow-md w-full">
             <div className="flex items-center space-x-4">
@@ -75,7 +72,7 @@ const FileUploader = ({ onFileSelect }: FileUploaderProps) => {
                 </div>
             </div>
             
-            {/* Remove Button (Styled for Dark Mode) */}
+            
             <button 
                 className="p-1.5 rounded-full bg-gray-600 hover:bg-red-500 text-white transition flex-shrink-0" 
                 onClick={handleRemoveFile}
@@ -87,14 +84,14 @@ const FileUploader = ({ onFileSelect }: FileUploaderProps) => {
           </div>
 
         ) : (
-          /* Default/Empty/Drag State View */
+          
           <div className="text-center space-y-3">
             <UploadIcon />
             <p className="text-lg text-gray-300 font-medium">
                 {isDragActive 
                     ? "Drop your PDF file here..."
                     : hasError 
-                        ? "File is too large or not a PDF!" // Error feedback
+                        ? "File is too large or not a PDF!"
                         : <><span className="text-indigo-400 font-semibold">Click to upload</span> or drag and drop</>
                 }
             </p>
@@ -102,7 +99,7 @@ const FileUploader = ({ onFileSelect }: FileUploaderProps) => {
                 PDF format only (max {formatSize(maxFileSize)})
             </p>
 
-            {/* Display error message if file was rejected */}
+            
             {hasError && (
                 <p className="text-sm text-red-400 font-medium">
                     Please ensure the file is a PDF and under {formatSize(maxFileSize)}.

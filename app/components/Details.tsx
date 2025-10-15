@@ -5,21 +5,18 @@ import {
   AccordionHeader,
   AccordionItem,
 } from "./Accordion";
-import React from "react"; // Explicitly imported for FC usage
+import React from "react"; 
 
-// Assuming Feedback type is available globally
 
-// --- 1. ScoreBadge Component (Modernized for Dark Theme) ---
-// Used inside the Accordion Header
 const ScoreBadge = ({ score }: { score: number }) => {
-  // Use Tailwind class names directly for status colors
+
   const bgColor = score > 69
     ? "bg-green-600"
     : score > 39
       ? "bg-yellow-600"
       : "bg-red-600";
   
-  const textColor = "text-white"; // White text always looks sharp on dark backgrounds
+  const textColor = "text-white"; 
 
   return (
     <div
@@ -28,7 +25,7 @@ const ScoreBadge = ({ score }: { score: number }) => {
         bgColor
       )}
     >
-      {/* Icon: Using a simple star or score marker */}
+      
       <svg className="size-4 text-white" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2l3.09 6.31L22 9.27l-5 4.87 1.18 6.88L12 18.25l-6.18 3.75L7 14.14l-5-4.87 5.91-.96L12 2z"/></svg>
       
       <p className={cn("text-sm font-medium", textColor)}>
@@ -38,7 +35,7 @@ const ScoreBadge = ({ score }: { score: number }) => {
   );
 };
 
-// --- 2. CategoryHeader Component (Used inside AccordionHeader) ---
+
 const CategoryHeader = ({
   title,
   categoryScore,
@@ -54,8 +51,7 @@ const CategoryHeader = ({
   );
 };
 
-// --- 3. CategoryContent Component (The core suggestion display) ---
-// This is heavily modernized to use dark theme colors and higher contrast
+
 const CategoryContent = ({
   tips,
 }: {
@@ -64,29 +60,29 @@ const CategoryContent = ({
   return (
     <div className="flex flex-col gap-6 w-full">
       
-      {/* Summary Chips (Removed the old bg-gray-50 block for a cleaner look) */}
+     
       
-      {/* Detailed Feedback Cards */}
+     
       <div className="flex flex-col gap-4 w-full">
         {tips.map((tip, index) => (
           <div
             key={index + tip.tip}
             className={cn(
               "flex flex-col gap-3 rounded-lg p-4 shadow-inner",
-              // Invert colors for dark theme contrast
+             
               tip.type === "good"
                 ? "bg-green-900/40 border border-green-700 text-green-300"
                 : "bg-red-900/40 border border-red-700 text-red-300"
             )}
           >
             <div className="flex flex-row gap-3 items-start">
-              {/* Icon (Using modern SVG paths for consistency) */}
+            
               <svg 
                   className={cn("w-5 h-5 mt-0.5 flex-shrink-0", tip.type === "good" ? "text-green-400" : "text-red-400")} 
                   xmlns="http://www.w3.org/2000/svg" 
                   width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"
               >
-                  {/* FIXED: Wrapped multiple path elements in a React Fragment */}
+                  
                   {tip.type === "good" 
                       ? (
                           <>
@@ -104,14 +100,14 @@ const CategoryContent = ({
                   }
               </svg>
               
-              {/* Tip Title */}
+              
               <p className="text-lg font-bold">
                   {tip.type === "good" ? 'Strength: ' : 'Improvement: '}
                   <span className="font-normal text-white">{tip.tip}</span>
               </p>
             </div>
             
-            {/* Explanation Body */}
+           
             <p className="text-sm text-gray-300 ml-8">
                 {tip.explanation}
             </p>
@@ -122,10 +118,10 @@ const CategoryContent = ({
   );
 };
 
-// --- 4. Details Component (Main Export) ---
+
 const Details = ({ feedback }: { feedback: Feedback }) => {
   return (
-    // Wrap component with a consistent dark-mode container
+    
     <div className="flex flex-col gap-6 w-full pt-4"> 
       <h3 className="text-2xl font-bold text-white border-b border-gray-700 pb-3">Detailed Category Breakdown</h3>
       <Accordion defaultOpen="tone-style" allowMultiple>

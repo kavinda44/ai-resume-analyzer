@@ -6,7 +6,7 @@ import ATS from "~/components/ATS";
 import Details from "~/components/Details";
 import Recommendations from "~/components/Recommendations";
 
-// Assuming Feedback type is globally available
+
 
 export const meta = () => ([
   { title: 'JobFit | Resume Review' },
@@ -21,12 +21,12 @@ const Resume = () => {
   const [feedback, setFeedback] = useState<Feedback | null>(null);
   const navigate = useNavigate();
 
-  // Authentication check
+ 
   useEffect(() => {
     if (!isLoading && !auth.isAuthenticated) navigate(`/auth?next=/resume/${id}`);
   }, [isLoading, auth.isAuthenticated, id, navigate]);
 
-  // Data Loading Logic (unchanged)
+ 
   useEffect(() => {
     const loadResume = async () => {
       const resume = await kv.get(`resume:${id}`);
@@ -61,10 +61,10 @@ const Resume = () => {
   );
 
   return (
-    // Use min-h-screen to ensure the page container is tall enough
+   
     <div className="min-h-screen bg-gray-900 text-white"> 
       
-      {/* 1. Header/Navigation Bar (using the Glassmorphism class) */}
+    
       <nav className="glass-effect sticky top-0 z-30 py-4 px-6 max-w-full">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <Link to="/" className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-white/10 transition">
@@ -73,7 +73,7 @@ const Resume = () => {
             </svg>
             <span className="text-white text-base font-semibold">Back to Dashboard</span>
           </Link>
-          {/* Optional: Add Job Title / Company Name here if available in the 'data' state */}
+          
           <a 
             href={resumeUrl} 
             target="_blank" 
@@ -85,10 +85,10 @@ const Resume = () => {
         </div>
       </nav>
 
-      {/* 2. Main Grid Layout */}
+    
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 min-h-[calc(100vh-64px)] w-full max-lg:flex-col-reverse">
         
-        {/* === LEFT COLUMN: RESUME PREVIEW (Sticky and Narrower: 5/12 width) === */}
+        
         <section 
           className="lg:col-span-5 p-8 lg:sticky lg:top-16 min-h-[50vh] lg:h-[calc(100vh-64px)] bg-gray-900 flex flex-col items-center justify-start border-r border-gray-800"
         >
@@ -109,7 +109,7 @@ const Resume = () => {
           )}
         </section>
         
-        {/* === RIGHT COLUMN: AI FEEDBACK (Scrollable and Wider: 7/12 width) === */}
+      
         <section className="lg:col-span-7 p-8 bg-gray-800">
           <h2 className="text-4xl font-bold text-white mb-8 border-b pb-4 border-gray-700">
             AI Analysis Report
@@ -118,16 +118,16 @@ const Resume = () => {
           {feedback ? (
             <div className="flex flex-col gap-12 animate-in fade-in duration-1000">
               
-              {/* 1. TOP-LEVEL RECOMMENDATIONS (Action Plan) */}
+             
               
 
-              {/* 2. Overall Summary and Score Breakdown */}
+            
               <Summary feedback={feedback} />
 
-              {/* 3. ATS Deep Dive */}
+              
               <ATS score={feedback.ATS.score || 0} suggestions={feedback.ATS.tips || []} />
               
-              {/* 4. Detailed Category Breakdown */}
+            
               <Details feedback={feedback} />
 
               <Recommendations feedback={feedback} /> 

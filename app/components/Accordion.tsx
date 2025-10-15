@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import React, { createContext, useContext, useState } from "react";
-// Assuming cn is a utility function for conditional class joining
+
 import { cn } from "~/lib/utils"; 
 
 interface AccordionContextType {
@@ -45,7 +45,7 @@ export const Accordion: React.FC<AccordionProps> = ({
           ? prev.filter((item) => item !== id)
           : [...prev, id];
       } else {
-        // Only one item can be open at a time (standard behavior)
+       
         return prev.includes(id) ? [] : [id];
       }
     });
@@ -57,7 +57,7 @@ export const Accordion: React.FC<AccordionProps> = ({
     <AccordionContext.Provider
       value={{ activeItems, toggleItem, isItemActive }}
     >
-      {/* Container: Dark background, rounded, with shadow */}
+      
       <div className={`space-y-4 bg-gray-800 rounded-xl p-4 shadow-xl ${className}`}>
         {children}
       </div>
@@ -76,7 +76,7 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
   children,
   className = "",
 }) => {
-  // Item container: No border needed here, the items naturally stack.
+ 
   return (
     <div className={`overflow-hidden rounded-lg transition-all duration-200 ${className}`}>
       {children}
@@ -102,22 +102,22 @@ export const AccordionHeader: React.FC<AccordionHeaderProps> = ({
   const { toggleItem, isItemActive } = useAccordion();
   const isActive = isItemActive(itemId);
 
-  // Default Arrow Icon (Modernized for dark theme)
+
   const defaultIcon = (
     <svg
       className={cn("w-5 h-5 transition-transform duration-200", {
-        "rotate-180 text-indigo-400": isActive, // Active state color
-        "text-gray-400": !isActive, // Inactive state color
+        "rotate-180 text-indigo-400": isActive, 
+        "text-gray-400": !isActive, 
       })}
       fill="none"
-      stroke="currentColor" // Use currentColor so it changes with text color
+      stroke="currentColor" 
       viewBox="0 0 24 24"
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
-        strokeWidth={2.5} // Slightly thicker stroke
+        strokeWidth={2.5} 
         d="M19 9l-7 7-7-7"
       />
     </svg>
@@ -127,12 +127,12 @@ export const AccordionHeader: React.FC<AccordionHeaderProps> = ({
     toggleItem(itemId);
   };
 
-  // Modern Header Styling
+
   const headerClasses = cn(
     "w-full px-4 py-4 text-left font-semibold text-lg focus:outline-none transition-colors duration-200 flex items-center justify-between cursor-pointer rounded-lg",
-    // Inactive state: Subtle hover effect
+    
     "text-white hover:bg-gray-700",
-    // Active state: Uses primary Indigo color for emphasis
+   
     isActive ? "bg-gray-700 text-indigo-400" : "bg-gray-800",
     className
   );
@@ -144,7 +144,7 @@ export const AccordionHeader: React.FC<AccordionHeaderProps> = ({
     >
       <div className="flex items-center space-x-4">
         {iconPosition === "left" && (icon || defaultIcon)}
-        <div className="flex-1">{children}</div> {/* Children (Title) inherits text-white or text-indigo-400 */}
+        <div className="flex-1">{children}</div> 
       </div>
       {iconPosition === "right" && (icon || defaultIcon)}
     </button>
@@ -173,7 +173,7 @@ export const AccordionContent: React.FC<AccordionContentProps> = ({
         className
       )}
     >
-      {/* Content area: Slightly lighter background than the container for contrast */}
+     
       <div className="px-4 py-4 text-gray-300 bg-gray-800 border-t border-gray-700">
         {children}
       </div>

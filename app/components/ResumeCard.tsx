@@ -2,24 +2,20 @@ import { Link } from "react-router";
 import { useEffect, useState } from "react";
 import { usePuterStore } from "~/lib/puter";
 
-// --------------------------------------------------------------------------------
-// Helper Function for Color Coding
-// --------------------------------------------------------------------------------
+
 const getScoreColor = (score: number) => {
   if (score >= 75) return 'bg-green-500';
   if (score >= 50) return 'bg-yellow-500';
   return 'bg-red-500';
 };
 
-// --------------------------------------------------------------------------------
-// ResumeCard Component (Main Export)
-// --------------------------------------------------------------------------------
+
 
 const ResumeCard = ({ resume: { id, companyName, jobTitle, feedback, imagePath } }: { resume: Resume }) => {
   const { fs } = usePuterStore();
   const [resumeUrl, setResumeUrl] = useState('');
 
-  // Data fetching logic (remains unchanged)
+ 
   useEffect(() => {
     const loadResume = async () => {
       const blob = await fs.read(imagePath);
@@ -34,16 +30,16 @@ const ResumeCard = ({ resume: { id, companyName, jobTitle, feedback, imagePath }
   const scoreColorClass = getScoreColor(score);
 
   return (
-    // Card Container (using the dark-theme .resume-card styling from app.css)
+   
     <Link to={`/resume/${id}`} className="resume-card animate-in fade-in duration-1000">
       
-      {/* HEADER SECTION: Title, Job, and Score (Text) */}
+     
       <div className="flex flex-col gap-2 pb-2 border-b border-gray-700">
         
-        {/* Row 1: Titles and Score Text */}
+      
         <div className="flex justify-between items-start gap-4">
           
-          {/* Titles */}
+        
           <div className="flex flex-col gap-1.5 flex-grow">
             {companyName && (
               <h2 className="text-xl font-bold text-white break-words">
@@ -60,7 +56,7 @@ const ResumeCard = ({ resume: { id, companyName, jobTitle, feedback, imagePath }
             )}
           </div>
           
-          {/* Score Text */}
+         
           <div className="flex-shrink-0 text-right">
             <span className="text-3xl font-extrabold text-white leading-none">{score}</span>
             <span className="text-xs text-gray-400 block mt-0.5">/100</span>
@@ -68,7 +64,7 @@ const ResumeCard = ({ resume: { id, companyName, jobTitle, feedback, imagePath }
 
         </div>
 
-        {/* Row 2: Gauge Bar Visualization */}
+       
         <div className="w-full bg-gray-700 rounded-full h-2 mt-2">
             <div 
                 className={`h-full rounded-full transition-all duration-700 ease-out ${scoreColorClass}`} 
@@ -78,7 +74,7 @@ const ResumeCard = ({ resume: { id, companyName, jobTitle, feedback, imagePath }
 
       </div>
       
-      {/* RESUME PREVIEW IMAGE (Unchanged) */}
+      
       {resumeUrl && (
         <div className="p-1.5 rounded-xl border border-gray-700 bg-gray-900 shadow-inner overflow-hidden">
           <div className="w-full h-full">
@@ -91,7 +87,7 @@ const ResumeCard = ({ resume: { id, companyName, jobTitle, feedback, imagePath }
         </div>
       )}
 
-      {/* FOOTER / MATCH RATING (Unchanged) */}
+      
       <div className="flex justify-between items-center pt-2 text-sm text-gray-400">
           <p>Click to view detailed AI feedback</p>
           <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>

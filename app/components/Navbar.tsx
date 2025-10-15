@@ -2,7 +2,7 @@ import { Link } from "react-router";
 import { useState } from "react";
 import React from 'react';
 
-// Define the correct types for the MenuButton component props
+
 interface MenuButtonProps {
     onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
     isOpen: boolean;
@@ -28,7 +28,7 @@ const Navbar = () => {
   return (
     <nav className="bg-gray-900 md:glass-effect sticky top-0 z-20"> 
       
-      {/* Inner Container: Centered content, max-width */}
+      
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center">
         
         <Link to="/" onClick={() => setIsMenuOpen(false)}>
@@ -37,7 +37,7 @@ const Navbar = () => {
           </p>
         </Link>
 
-        {/* Desktop Links and Action Button */}
+       
         <div className="hidden md:flex items-center space-x-6">
           
           <div className="flex items-center space-x-6 text-sm font-medium">
@@ -52,7 +52,7 @@ const Navbar = () => {
             </Link>
           </div>
 
-          {/* ACTION BUTTON */}
+         
           <Link 
             to="/upload" 
             className="bg-[#00F5FF90] text-white font-semibold rounded-lg px-4 py-2 text-sm shadow-md hover:bg-[#00F5FF] transition duration-150 ease-in-out"
@@ -62,7 +62,7 @@ const Navbar = () => {
           
         </div>
         
-        {/* Mobile Menu Button */}
+       
         <MenuButton onClick={() => setIsMenuOpen(!isMenuOpen)} isOpen={isMenuOpen} />
 
       </div>
@@ -81,7 +81,7 @@ const Navbar = () => {
                 Contact Us
             </Link>
             
-            {/* Mobile Action Button */}
+            
             <Link 
                 to="/upload" 
                 onClick={() => setIsMenuOpen(false)}
