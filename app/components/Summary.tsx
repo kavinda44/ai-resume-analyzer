@@ -12,7 +12,7 @@ const Category = ({ title, score }: { title: string, score: number }) => {
       ? 'text-yellow-400' : 'text-red-400';
 
   return (
-    // Replaced legacy classes with clean dark-mode styles
+    // Category Breakdown: Already responsive as it uses flex items-center and justify-between
     <div className="flex items-center justify-between p-4 bg-gray-800 rounded-lg border border-gray-700 hover:bg-gray-700 transition duration-200">
       
       {/* Category Title and Badge */}
@@ -36,16 +36,16 @@ const Summary = ({ feedback }: { feedback: Feedback }) => {
     // Main Card Container: Dark, elevated, contrasting the page background
     <div className="bg-gray-900 rounded-xl shadow-2xl w-full p-6 border border-gray-700">
       
-      {/* Top Section: Gauge and Text Intro */}
-      <div className="flex items-center gap-6 p-4 border-b border-gray-700 mb-6">
+      {/* Top Section: Gauge and Text Intro - STACKS ON MOBILE, ROW ON LARGE SCREENS */}
+      <div className="flex flex-col lg:flex-row items-center lg:items-start gap-6 p-4 border-b border-gray-700 mb-6">
         
         {/* Overall Score Visualization */}
-        <div className="flex-shrink-0">
+        <div className="flex-shrink-0 mb-4 lg:mb-0">
             <ScoreGauge score={feedback.overallScore} />
         </div>
 
         {/* Text Summary */}
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 text-center lg:text-left">
           <h2 className="text-2xl font-bold text-white">Overall Resume Match Score</h2>
           <p className="text-sm text-gray-400">
             This score indicates the predicted effectiveness of your resume against the job description. Review the detailed categories below.

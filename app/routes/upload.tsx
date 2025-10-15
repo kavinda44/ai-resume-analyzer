@@ -172,7 +172,7 @@ const Upload = () => {
 
                         {/* Submit Button */}
                         <button 
-                            className="w-full bg-indigo-600 text-white font-semibold rounded-lg px-6 py-3 shadow-lg hover:bg-indigo-700 transition duration-150 ease-in-out disabled:opacity-50"
+                            className="w-full bg-[#00F5FF90] text-white font-semibold rounded-lg px-6 py-3 shadow-lg hover:bg-[#00BFFF] transition duration-150 ease-in-out disabled:opacity-50 cursor-pointer pointer-events-auto"
                             type="submit"
                             disabled={!file} // Disable if no file is selected
                         >

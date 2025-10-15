@@ -4,6 +4,7 @@ import { usePuterStore } from "~/lib/puter";
 import Summary from "~/components/Summary";
 import ATS from "~/components/ATS";
 import Details from "~/components/Details";
+import Recommendations from "~/components/Recommendations";
 
 // Assuming Feedback type is globally available
 
@@ -84,7 +85,7 @@ const Resume = () => {
         </div>
       </nav>
 
-      {/* 2. Main Grid Layout: Set a common container to handle the width */}
+      {/* 2. Main Grid Layout */}
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 min-h-[calc(100vh-64px)] w-full max-lg:flex-col-reverse">
         
         {/* === LEFT COLUMN: RESUME PREVIEW (Sticky and Narrower: 5/12 width) === */}
@@ -116,9 +117,20 @@ const Resume = () => {
           
           {feedback ? (
             <div className="flex flex-col gap-12 animate-in fade-in duration-1000">
+              
+              {/* 1. TOP-LEVEL RECOMMENDATIONS (Action Plan) */}
+              
+
+              {/* 2. Overall Summary and Score Breakdown */}
               <Summary feedback={feedback} />
+
+              {/* 3. ATS Deep Dive */}
               <ATS score={feedback.ATS.score || 0} suggestions={feedback.ATS.tips || []} />
+              
+              {/* 4. Detailed Category Breakdown */}
               <Details feedback={feedback} />
+
+              <Recommendations feedback={feedback} /> 
             </div>
           ) : (
             LoadingState
