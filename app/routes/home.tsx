@@ -21,21 +21,19 @@ export default function Home() {
   const [resumes, setResumes] = useState<Resume[]>([]);
   const [loadingResumes, setLoadingResumes] = useState(false);
 
-  // FIX: This useEffect now properly waits for authentication AND the KV object to be available.
+ 
   useEffect(() => {
-    // If the user is not authenticated OR the KV object isn't ready, we exit the function.
-    if (!auth.isAuthenticated || !kv) {
-      return; 
+   
+    if (!auth.isAuthenticated) {
+     
+    } else {
+      loadResumes();
     }
-    
-    // Only call loadResumes if authenticated and KV is initialized
-    loadResumes();
-  }, [auth.isAuthenticated, kv]); // Dependency on 'kv' is crucial for fixing the 401 error
+  }, [auth.isAuthenticated])
 
   const loadResumes = async () => {
     setLoadingResumes(true);
   
-    // Since this function is only called when 'kv' exists, the 401 error should be resolved here.
     const resumes = (await kv.list('resume:*', true)) as KVItem[];
     const parsedResumes = resumes?.map((resume) => (
       JSON.parse(resume.value) as Resume
@@ -46,28 +44,29 @@ export default function Home() {
   }
 
 
+
   const svgBackground = (
     <svg className="absolute -z-10 w-screen -mt-40 md:mt-0" width="1440" height="676" viewBox="0 0 1440 676" fill="none" xmlns="http://www.w3.org/2000/svg">
       <rect x="-92" y="-948" width="1624" height="1624" rx="812" fill="url(#a)"/>
       <defs>
         <radialGradient id="a" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="rotate(90 428 292)scale(812)">
           {/* Using a custom dark blue (#372AAC) for the background gradient */}
-          <stop offset=".63" stopColor="#372AAC" stopOpacity="0"/> 
-          <stop offset="1" stopColor="#372AAC"/>
+          <stop offset=".63" stop-color="#372AAC" stop-opacity="0"/> 
+          <stop offset="1" stop-color="#372AAC"/>
         </radialGradient>
       </defs>
     </svg>
   );
 
   return (
-    
+   
     <div className="min-h-screen bg-gray-900 text-white"> 
       
       {svgBackground}
       
       <Navbar /> 
 
-      
+     
       <section className="flex flex-col items-center pt-10 pb-20 px-6 md:px-16 lg:px-24 xl:px-32 relative z-10">
         
         
@@ -84,14 +83,14 @@ export default function Home() {
           Instantly evaluate candidates with AI-driven ATS scoring and precise, automated job-to-resume matching.
         </p>
 
-        
+       
         <div className="flex items-center gap-4 mt-8">
           
           
           <div className="relative inline-block p-0.5 rounded-full overflow-hidden transition duration-300 hover:scale-[1.05] active:scale-100 
-                         before:absolute before:inset-0 before:bg-[conic-gradient(from_0deg,_#00F5FF,_#00F5FF30,_#00F5FF)] animated-button-wrapper">
+                        before:absolute before:inset-0 before:bg-[conic-gradient(from_0deg,_#00F5FF,_#00F5FF30,_#00F5FF)] animated-button-wrapper">
               
-              
+             
               <Link 
                 to="/upload" 
                 className="relative z-10 flex items-center gap-2 bg-gray-800 text-white font-semibold rounded-full px-8 h-12 text-lg transition duration-150 ease-in-out hover:bg-gray-700"
@@ -105,8 +104,7 @@ export default function Home() {
           
         </div>
 
-        
-        
+       
         {auth.isAuthenticated && (
           <div className="w-full max-w-7xl mt-20">
             <h2 className="text-3xl font-bold mb-6 text-center text-white">Your Recent Analyses</h2>
