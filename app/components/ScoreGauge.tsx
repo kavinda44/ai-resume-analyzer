@@ -68,7 +68,7 @@ const ScoreGauge = ({ score = 75 }: { score: number }) => {
 
        
         <div className="absolute inset-0 flex flex-col items-center justify-center pt-2">
-            <span className="text-3xl font-extrabold text-white leading-none">{score}</span>
+            <span className="text-xl font-extrabold text-white leading-none">{score}</span>
             <span className="text-sm font-medium text-gray-400 mt-1">/100 MATCH</span>
         </div>
       </div>

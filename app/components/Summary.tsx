@@ -22,10 +22,7 @@ const Category = ({ title, score }: { title: string, score: number }) => {
       </div>
       
       
-      <p className="text-xl font-extrabold">
-        <span className={textColor}>{score}</span>
-        <span className="text-gray-500 font-normal">/100</span>
-      </p>
+     
     </div>
   )
 }
