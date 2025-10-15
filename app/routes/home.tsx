@@ -72,7 +72,7 @@ export default function Home() {
         
         <div className="flex items-center mt-20 gap-2 border border-slate-600 text-gray-50 rounded-full px-4 py-2">
           <div className="size-2.5 bg-green-500 rounded-full"></div>
-          <span>AI-Powered Recruitment Tool</span>
+          <span>Powered Recruitment Tool</span>
         </div>
         
         <h1 className="text-center text-5xl leading-[68px] md:text-6xl md:leading-[70px] mt-4 font-semibold max-w-4xl">
