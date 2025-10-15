@@ -7,5 +7,6 @@ export default [
   route('/about','routes/about.tsx' ),
   route('/contact','routes/contact.tsx' ),
   route('/resume/:id','routes/resume.tsx' ),
+  route('/wipe','routes/wipe.tsx' ),
 
 ] satisfies RouteConfig;
