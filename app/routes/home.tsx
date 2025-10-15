@@ -14,8 +14,8 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Home() {
-  // Destructuring `kv` is no longer necessary here, as we separate the data loading logic
-  const { auth } = usePuterStore(); 
+  // FIX 1: Destructure 'kv' again, as it's needed for data fetching.
+  const { auth, kv } = usePuterStore(); 
   const navigate = useNavigate();
   const [resumes, setResumes] = useState<Resume[]>([]);
   const [loadingResumes, setLoadingResumes] = useState(false);
@@ -26,25 +26,33 @@ export default function Home() {
     if (!auth.isAuthenticated) {
       navigate('/auth');
     }
-    // If they ARE authenticated, we let the second useEffect handle data loading.
   }, [auth.isAuthenticated, navigate]);
 
 
-  // 2. Data Loading Logic (Fixes 401 error by depending on kv and auth.isAuthenticated)
-  // NOTE: I am commenting out the body of loadResumes here as the full function definition 
-  // is often complex, but the call to it is what matters.
+  // FIX 2: Reinstate the data loading logic with the Puter KV call
   const loadResumes = async () => {
-    // FIX: Placeholder for your data loading logic (which relies on kv.list)
-    /*
+    // Crucial check: Exit if kv is not initialized (to prevent 401/runtime errors)
+    if (!kv) return;
+
     setLoadingResumes(true);
+  
+    // Fetch all resume data from Puter KV
     const resumes = (await kv.list('resume:*', true)) as KVItem[];
     const parsedResumes = resumes?.map((resume) => (
       JSON.parse(resume.value) as Resume
     ));
+
     setResumes(parsedResumes || []);
     setLoadingResumes(false);
-    */
   }
+
+  // FIX 3: New useEffect to trigger data loading when authenticated and kv is ready
+  useEffect(() => {
+    if (auth.isAuthenticated && kv) {
+      loadResumes();
+    }
+  }, [auth.isAuthenticated, kv]); // Dependency on 'kv' ensures data loads when service initializes
+
 
   // --- RENDERING STARTS HERE ---
 
@@ -111,7 +119,7 @@ export default function Home() {
           
         </div>
 
-        {/* Conditional Dashboard/Results View (This area already requires auth.isAuthenticated) */}
+        {/* Conditional Dashboard/Results View */}
         <div className="w-full max-w-7xl mt-20">
           <h2 className="text-3xl font-bold mb-6 text-center text-white">Your Recent Analyses</h2>
           
