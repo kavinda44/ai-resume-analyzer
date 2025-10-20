@@ -17,7 +17,7 @@ This project blends clean React engineering with practical AI to give a professi
 
 ## ✨ Features
 
-- **Instant ATS Scoring** — A clear, out-of-100 score for resume–JD match.
+- **Instant ATS Scoring** — A clear, out-of-100 score for resume–Job details match.
 - **Detailed AI Feedback** — Targeted suggestions across **Tone & Style**, **Content**, **Structure**, and **Skills/Keywords**.
 - **Resume Visualization** — Sticky, high-contrast side-by-side view of Job Details and Resume Preview.
 - **Client-Side AI Processing** — Powered by **Puter.js** for analysis, auth, and storage (no separate API keys or complex backend).
