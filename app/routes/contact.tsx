@@ -69,7 +69,7 @@ const Contact = () => {
           {/* Submit Button */}
           <button 
             type="submit"
-            className="w-full bg-indigo-600 text-white font-semibold rounded-lg px-6 py-3 shadow-lg hover:bg-indigo-700 transition duration-150 ease-in-out"
+            className="w-full bg-indigo-500 cursor-pointer text-white font-semibold rounded-lg px-6 py-3 shadow-lg hover:bg-indigo-600 transition duration-150 ease-in-out"
             disabled={isSubmitted}
           >
             {isSubmitted ? 'Message Sent!' : 'Send Message'}

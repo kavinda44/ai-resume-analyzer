@@ -55,7 +55,7 @@ const Navbar = () => {
          
           <Link 
             to="/upload" 
-            className="bg-[#00F5FF90] text-white font-semibold rounded-lg px-4 py-2 text-sm shadow-md hover:bg-[#00F5FF] transition duration-150 ease-in-out"
+            className="bg-indigo-500 text-white font-semibold rounded-lg px-4 py-2 text-sm shadow-md hover:bg-indigo-600 transition duration-150 ease-in-out"
           >
             Analyze Resume
           </Link>
@@ -85,7 +85,7 @@ const Navbar = () => {
             <Link 
                 to="/upload" 
                 onClick={() => setIsMenuOpen(false)}
-                className="mt-8 bg-[#00F5FF90] text-white font-semibold text-lg rounded-lg px-4 py-3 text-center shadow-lg hover:bg-[#00F5FF] transition duration-150 ease-in-out"
+                className="mt-8 bg-indigo-500 text-white font-semibold text-lg rounded-lg px-4 py-3 text-center shadow-lg hover:bg-indigo-600 transition duration-150 ease-in-out"
             >
                 Analyze Resume
             </Link>

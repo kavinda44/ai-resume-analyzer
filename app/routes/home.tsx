@@ -14,79 +14,59 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Home() {
-  // FIX 1: Destructure 'kv' again, as it's needed for data fetching.
   const { auth, kv } = usePuterStore(); 
   const navigate = useNavigate();
   const [resumes, setResumes] = useState<Resume[]>([]);
   const [loadingResumes, setLoadingResumes] = useState(false);
 
-  // 1. Redirection Logic (Runs when auth state changes)
   useEffect(() => {
-    // If the user is NOT authenticated, redirect them to the login page immediately.
     if (!auth.isAuthenticated) {
       navigate('/auth');
     }
   }, [auth.isAuthenticated, navigate]);
 
-
-  // FIX 2: Reinstate the data loading logic with the Puter KV call
   const loadResumes = async () => {
-    // Crucial check: Exit if kv is not initialized (to prevent 401/runtime errors)
     if (!kv) return;
-
     setLoadingResumes(true);
-  
-    // Fetch all resume data from Puter KV
     const resumes = (await kv.list('resume:*', true)) as KVItem[];
     const parsedResumes = resumes?.map((resume) => (
       JSON.parse(resume.value) as Resume
     ));
-
     setResumes(parsedResumes || []);
     setLoadingResumes(false);
   }
 
-  // FIX 3: New useEffect to trigger data loading when authenticated and kv is ready
   useEffect(() => {
     if (auth.isAuthenticated && kv) {
       loadResumes();
     }
-  }, [auth.isAuthenticated, kv]); // Dependency on 'kv' ensures data loads when service initializes
-
-
-  // --- RENDERING STARTS HERE ---
+  }, [auth.isAuthenticated, kv]);
 
   const svgBackground = (
     <svg className="absolute -z-10 w-screen -mt-40 md:mt-0" width="1440" height="676" viewBox="0 0 1440 676" fill="none" xmlns="http://www.w3.org/2000/svg">
       <rect x="-92" y="-948" width="1624" height="1624" rx="812" fill="url(#a)"/>
       <defs>
         <radialGradient id="a" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="rotate(90 428 292)scale(812)">
-          {/* Using a custom dark blue (#372AAC) for the background gradient */}
-          <stop offset=".63" stop-color="#372AAC" stop-opacity="0"/> 
-          <stop offset="1" stop-color="#372AAC"/>
+          <stop offset=".63" stopColor="#372AAC" stopOpacity="0"/> 
+          <stop offset="1" stopColor="#372AAC"/>
         </radialGradient>
       </defs>
     </svg>
   );
 
-  // If not authenticated, we return an empty fragment or null to prevent rendering the hero section 
-  // momentarily before the redirect takes effect.
   if (!auth.isAuthenticated) {
     return <div className="min-h-screen bg-gray-900" />;
   }
 
   return (
-    // Set min-h-screen and the overall dark background context
     <div className="min-h-screen bg-gray-900 text-white"> 
       
       {svgBackground}
       
       <Navbar /> 
 
-      {/* Main Content Section */}
       <section className="flex flex-col items-center pt-10 pb-20 px-6 md:px-16 lg:px-24 xl:px-32 relative z-10">
         
-        {/* HERO SECTION - Landing Page Content (Only shows when user IS authenticated) */}
         <div className="flex items-center mt-20 gap-2 border border-slate-600 text-gray-50 rounded-full px-4 py-2">
           <div className="size-2.5 bg-green-500 rounded-full"></div>
           <span>AI-Powered Recruitment Tool</span>
@@ -100,27 +80,70 @@ export default function Home() {
           Instantly evaluate candidates with AI-driven ATS scoring and precise, automated job-to-resume matching.
         </p>
 
-        {/* Action Buttons */}
         <div className="flex items-center gap-4 mt-8">
-          
           <div className="relative inline-block p-0.5 rounded-full overflow-hidden transition duration-300 hover:scale-[1.05] active:scale-100 
-                         before:absolute before:inset-0 before:bg-[conic-gradient(from_0deg,_#00F5FF,_#00F5FF30,_#00F5FF)] animated-button-wrapper">
-              
+                         before:absolute before:inset-0 before:bg-[conic-gradient(from_0deg,_#4F46E5,_#A78BFA,_#4F46E5)] animated-button-wrapper">
               <Link 
                 to="/upload" 
-                className="relative z-10 flex items-center gap-2 bg-gray-800 text-white font-semibold rounded-full px-8 h-12 text-lg transition duration-150 ease-in-out hover:bg-gray-700"
+                className="relative z-10 flex items-center gap-2 bg-gray-900 text-white font-semibold rounded-full px-8 h-12 text-lg transition duration-150 ease-in-out hover:bg-gray-800"
               >
-                Upload Resume
+                Analyze My Resume
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M4.166 10h11.667m0 0L9.999 4.165m5.834 5.833-5.834 5.834" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </Link>
           </div>
-          
         </div>
+      </section>
 
-        {/* Conditional Dashboard/Results View */}
-        <div className="w-full max-w-7xl mt-20">
+   
+      <section className="py-20 bg-gray-900">
+        <div className="max-w-5xl mx-auto px-8">
+          <h2 className="text-3xl font-bold text-center text-white">How JobFit Transforms Your Application</h2>
+          <p className="text-center text-slate-400 mt-2 max-w-lg mx-auto">
+            Our AI-driven process gives you the competitive edge in three simple steps.
+          </p>
+          <div className="relative grid grid-cols-1 md:grid-cols-3 gap-8 pt-16">
+            
+            
+            <div className="p-8 bg-gray-800 rounded-xl border border-gray-700">
+                <div className="flex items-center justify-center size-12 bg-indigo-900/50 border border-indigo-500/50 rounded-lg">
+                    <img src="../icons/upload.png" alt="Upload Icon" className="size-8" />
+                </div>
+                <div className="mt-5 space-y-2">
+                    <h3 className="text-lg font-semibold text-white">Instant Upload</h3>
+                    <p className="text-sm text-slate-400">Provide any job description and upload your resume in PDF format to get started.</p>
+                </div>
+            </div>
+
+           
+            <div className="p-8 bg-gray-800 rounded-xl border border-gray-700">
+                <div className="flex items-center justify-center size-12 bg-indigo-900/50 border border-indigo-500/50 rounded-lg">
+                    <img src="../icons/ai.png" alt="AI Analysis Icon" className="size-8" />
+                </div>
+                <div className="mt-5 space-y-2">
+                    <h3 className="text-lg font-semibold text-white">AI-Powered Analysis</h3>
+                    <p className="text-sm text-slate-400">Our engine evaluates your CV for keyword alignment, structure, and content quality.</p>
+                </div>
+            </div>
+
+            
+            <div className="p-8 bg-gray-800 rounded-xl border border-gray-700">
+                <div className="flex items-center justify-center size-12 bg-indigo-900/50 border border-indigo-500/50 rounded-lg">
+                    <img src="../icons/report.png" alt="Feedback Report Icon" className="size-8" />
+                </div>
+                <div className="mt-5 space-y-2">
+                    <h3 className="text-lg font-semibold text-white">Actionable Feedback</h3>
+                    <p className="text-sm text-slate-400">Receive an instant ATS score and a detailed report to refine your resume and boost your chances.</p>
+                </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+      
+      {auth.isAuthenticated && (
+        <section className="w-full max-w-7xl mx-auto px-8 pb-20">
           <h2 className="text-3xl font-bold mb-6 text-center text-white">Your Recent Analyses</h2>
           
           {loadingResumes ? (
@@ -148,9 +171,14 @@ export default function Home() {
                 </Link>
               </div>
             </div>
+            
           )}
-        </div>
-      </section>
+          <p className="text-xs text-gray-500 mt-6 items-center text-center">
+                        © 2025 Kavinda Dissanayake. All Rights Reserved. 
+                    </p>
+        </section>
+      )}
     </div>
   );
 }
+
