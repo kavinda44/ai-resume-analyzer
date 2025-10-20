@@ -86,9 +86,7 @@ const About = () => {
                     >
                         Analyze My Resume
                     </Link>
-                     <p className="text-xs text-gray-500 mt-6">
-                        © 2025 Kavinda Dissanayake. All Rights Reserved. The JobFit name, brand, and source code are the intellectual property of the creator.
-                    </p>
+                    
                 </section>
                 
             </main>
